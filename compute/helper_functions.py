@@ -77,6 +77,7 @@ def get_title_words(title):
     title = title.lower()
     split_words = title.split()
     split_words = [word for word in split_words if len(word) > 2]
+    split_words = list(set(split_words)) #remove duplicates
     return split_words
 
 def words_by_danceability(words, danceability, decade):
@@ -157,12 +158,12 @@ def get_top_10_words_by_decade(df_count_by_decade):
         top_words_danceability = []
         if(len(df_decade) < 10):
             for i in range(len(df_decade)):
-                top_words_danceability.append((df_decade.iloc[i]['word'], df_decade.iloc[i]['danceability']))
+                top_words_danceability.append((df_decade.iloc[i]['word'], df_decade.iloc[i]['danceability'], df_decade.iloc[i]['count']))
             for i in range(10-len(df_decade)):
                 top_words_danceability.append((None, None))
         else:
             for i in range(10):
-                top_words_danceability.append((df_decade.iloc[i]['word'], df_decade.iloc[i]['danceability']))
+                top_words_danceability.append((df_decade.iloc[i]['word'], df_decade.iloc[i]['danceability'], df_decade.iloc[i]['count']))
         mean_dance_by_decade[decade] = top_words_danceability
     df_mean_dance_by_decade = pd.DataFrame(mean_dance_by_decade)
     return df_mean_dance_by_decade
