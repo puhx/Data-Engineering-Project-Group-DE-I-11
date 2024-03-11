@@ -1,6 +1,8 @@
 from collections import defaultdict
 import pandas as pd
 
+# Helper functions for the process_pandas file
+
 def get_bpm_range(bpm_diff):
     if bpm_diff < 10:
         return 0.6
@@ -61,6 +63,9 @@ def preprocess_data(df, check_year):
     new_df = new_df.drop(['loudness', 'bpm', 'year'], axis=1)
     return new_df
 
+
+# functions for title analysis
+# not used in this project analysis or scalability testing
 
 def get_title_words(title):
     #remove all of the words in parentheses
